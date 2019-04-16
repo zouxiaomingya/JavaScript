@@ -42,12 +42,12 @@ axios.post('/user', {
 
 使用方式不是本次主题的重点，具体使用方式可以参照 [Axios 中文说明](https://www.kancloud.cn/yunye/axios/234845)
 
-> 源码拉下来直接进入 lib 开始解读源码
+> 源码拉下来直接进入 lib 文件夹开始解读源码
 >
 
 ###  源码解读
 
-> lib/axios.js 开始
+> lib/ axios.js 开始
 
 ```javascript
 'use strict';
@@ -92,7 +92,7 @@ module.exports = axios;
 module.exports.default = axios;
 ```
 
-> lib/util.js  工具方法
+> lib/ util.js  工具方法
 
 有如下方法：
 
@@ -143,11 +143,12 @@ function extend(a, b, thisArg) {
 ```
 抽象的话看个例子
 
-![1555136627494](C:\Users\zm\AppData\Local\Temp\1555136627494.png)
+
+![](https://user-gold-cdn.xitu.io/2019/4/16/16a265cacd5df68f?w=528&h=610&f=png&s=38777)
 
 这样是不是就一目了然。fn2 函数没有拿自己对象内的 age = 20  而是被指定到了 thisArg 中的 age
 
-> forEach 方法 遍历基本数据，数组，对象。
+> 自定义 forEach 方法遍历基本数据，数组，对象。
 
 ```javascript
 function forEach(obj, fn) {
@@ -191,7 +192,8 @@ function merge(/* obj1, obj2, obj3, ... */) {
 ```
 如下图所示：
 
-![1555138065317](C:\Users\zm\AppData\Local\Temp\1555138065317.png)
+
+![](https://user-gold-cdn.xitu.io/2019/4/16/16a265d37893d1e7?w=556&h=203&f=png&s=21553)
 
 > bind -> lib/ helpers/ bind.js  这个很清楚，返回一个函数，并且传入的方法执行上下文绑定到 thisArg上。
 
@@ -291,7 +293,7 @@ module.exports = Axios;
 
 ```
 
-上面的所以方法都是通过调用了 this.request 方法
+上面的所有的方法都是通过调用了 this.request 方法
 
 那么我们就来看这个 request 方法，个人认为是源码内的精华也是比较难理解的部分，使用到了 Promise 的链式调用，也使用到了中间件的思想。
 
@@ -633,11 +635,11 @@ module.exports = defaults;
 
 1. Axios 的源码走读一遍确实可以看到和学习到很多的东西。
 2. Axios 还有一些功能：请求的取消，请求超时的处理。这里我没有全部说明。
-3. Axios 通过在请求中添加toke并验证方法，让客户端支持防御 XSRF [Django CSRF 原理分析](https://blog.csdn.net/u011715678/article/details/48752873)
+3. Axios 通过在请求中添加 toke 并验证方法，让客户端支持防御 XSRF [Django CSRF 原理分析](https://blog.csdn.net/u011715678/article/details/48752873)
 
  ### 最后
 
-如果看的还不是很明白，不用担心，这基本上是我表达，书写的不够好。因为在写篇文章时我也曾反复的删除，重写，总觉得表达的不够清楚。不过你可以通过自己去 github 将代码拉下来对照着来看。
+如果看的还不是很明白，不用担心，这基本上是我表达，书写的不够好。因为在写篇文章时我也曾反复的删除，重写，总觉得表达的不够清楚。为了加强理解和学习大家可以去 github 将代码拉下来对照着来看。
 
 ` git clone https://github.com/axios/axios.git`
 
@@ -645,7 +647,7 @@ module.exports = defaults;
 
 参考：
 
-- [Axios 中文说明](https://www.kancloud.cn/yunye/axios/234845)
-- [Axios 源码](https://github.com/axios/axios)
+- [Axios 中文说明，很详细的教程](https://www.kancloud.cn/yunye/axios/234845)
+- [Axios 源码 github](https://github.com/axios/axios)
 - [推荐 Axios源码深度剖析](https://juejin.im/post/5b0ba2d56fb9a00a1357a334)
 
