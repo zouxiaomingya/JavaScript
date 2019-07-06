@@ -17,7 +17,7 @@ useState 只接收一个参数 inital value，并看不出有什么特殊的地�
 1. 很难复用逻辑（只能用HOC，或者render props），会导致组件树层级很深
 2. 会产生巨大的组件（指很多代码必须写在类里面）
 3. 类组件很难理解，比如方法需要`bind`，`this`指向不明确
-4. 
+比如 经常看到这样的写法。
 
 ```javascript
 // 可能是这样
@@ -120,9 +120,9 @@ import ReactDOM from "react-dom";
 import "./styles.css";
 
 function App() {
-  const [Switch, setSwitch] = useState("打开");
+  const [switch, setSwitch] = useState("打开");
   const handleSwitch = _ =>
-    Switch === "打开" ? setSwitch("关闭") : setSwitch("打开");
+    switch === "打开" ? setSwitch("关闭") : setSwitch("打开");
   const [num, setNum] = useState(0);
   const add = () => {
     setNum(num + 1);
@@ -135,7 +135,7 @@ function App() {
   }, [num]);
   return (
     <div>
-      <p>现在是: {Switch}状态</p>
+      <p>现在是: {switch}状态</p>
       <button onClick={handleSwitch}>Change Me!</button>
       <p>数字: {num}</p>
       <button onClick={add}> +1 </button>
@@ -174,7 +174,7 @@ useEffect(() => {
   }, [num]);
 ```
 
-那么现在，当 activeUser 状态改变的时候我们会发现又打印出了 改变状态 这句话。而当 Switch 状态改变的时候并不会打印这句话。
+那么现在，当 activeUser 状态改变的时候我们会发现又打印出了 改变状态 这句话。而当 switch 状态改变的时候并不会打印这句话。
 
 ### useEffect 的闭包使用
 
@@ -195,8 +195,6 @@ function App() {
 }
 export default App;
 ```
-
-
 
 在 useEffect 中我们可以做两件事情，组件挂载完成时候，还有组件卸载时，只要在 useEffect  中使用闭包，在闭包中做我们想要在组件卸载时需要做的事就可以。
 
@@ -479,6 +477,9 @@ function FancyInput(props, ref) {
 }
 export default forwardRef(FancyInput);
 
+
+```
+```javascript
 // 父组件
 import React, { useRef } from "react";
 function App(){
@@ -493,9 +494,6 @@ function App(){
 
 }
 ```
-
-
-
 ### 最后
 
 实战使用 hooks 也快 3 4 个月了。确实感觉到了 React 慢慢变得更加强大，函数式组件使用也是非常精简和方便，个人认为脱离了 Class 代码的可读性，可维护性也感觉更加高了。
