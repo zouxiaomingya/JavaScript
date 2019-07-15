@@ -10,6 +10,8 @@
 
 - [React_hooks 总结](https://github.com/zouxiaomingya/JavaScript/issues/6)
 
+- [git 小总结 ](https://github.com/zouxiaomingya/JavaScript/issues/7)
+
 
 
 
