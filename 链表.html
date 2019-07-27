@@ -19,6 +19,13 @@ function find(){
     }
     return currNode;
 }
+    
+function insert(){
+    var newNode = newNode(newElement);
+    var current = this.find(item);
+    newNode.next = current.next;
+    current.next = newNode;
+}
 
 
 function List(){
@@ -28,5 +35,7 @@ function List(){
     this.remove = remove;
     this.display = display;
 }
+    
+   
 </script>
 </html>
