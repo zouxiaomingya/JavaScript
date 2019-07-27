@@ -1,48 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
+
 <body>
-    
 </body>
 <script>
 
-
-function find(){
-    var currNode = this.head;
-    while(currNode.element != item){
-        currNode = currNode.next;
+    // 链表查找
+    function find() {
+        var currNode = this.head;
+        while (currNode.element != item) {
+            currNode = currNode.next;
+        }
+        return currNode;
     }
-    return currNode;
-}
-    
-function insert(){
-    var newNode = newNode(newElement);
-    var current = this.find(item);
-    newNode.next = current.next;
-    current.next = newNode;
-}
 
-function display(){
-    var currNode = this.head;
-    while(!currNode.next == null){
-        console.log(currNode.next.element);
-        currNode = currNode.next;
+    // 插入 节点
+    function insert() {
+        var newNode = new Node(newElement);
+        var current = this.find(item);
+        newNode.next = current.next;
+        current.next = newNode;
     }
-}
 
-function List(){
-    this.head = new Node('head');
-    this.find = find;
-    this.insert = insert;
-    this.remove = remove;
-    this.display = display;
-}
+    // 显示链表元素
+    function display() {
+        var currNode = this.head;
+        while (!currNode.next == null) {
+            console.log(currNode.next.element);
+            currNode = currNode.next;
+        }
+    } 
     
-   
+    // Node 类
+    function Node() {
+
+    }
+    // LinkedLise 类
+    function List() {
+        this.head = new Node('head');
+        this.find = find;
+        this.insert = insert;
+        this.remove = remove;
+        this.display = display;
+    }
+
+
 </script>
+
 </html>
