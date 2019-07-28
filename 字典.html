@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    function add(key, value) {
+        this.datastore[key] = value;
+    }
+    function find(key) {
+        return this.datastore[key]
+
+    }
+    function remove(key) {
+        delete this.datastore[key]
+    }
+    function showAll() {
+        Object.keys(this.datastore).forEach((key) => {
+            console.log(key, this.datastore[key]);
+        })
+    }
+    function Dictionary() {
+        this.datastore = new Array();
+        this.add = add;
+        this.find = find;
+        this.remove = remove;
+        this.showAll = showAll;
+    }
+
+    var pBook = new Dictionary();
+    pBook.add('Mike', '18')
+    pBook.add('Kevin', '20')
+    pBook.add('Sani', '17')
+    pBook.showAll()
+</script>
+
+</html>
