@@ -18,8 +18,8 @@
         var n = 0;
         for (var key in Object.keys(this.datastore)) {
             n++;
-            return n;
         }
+        return n;
     }
 
     // 清空
@@ -64,10 +64,12 @@
     }
 
     var pBook = new Dictionary();
-    pBook.add('Mike', '18')
-    pBook.add('Kevin', '20')
-    pBook.add('Sani', '17')
-    pBook.showAll()
+    pBook.add('Mike', '18');
+    pBook.add('Kevin', '20');
+    pBook.add('Sani', '17');
+    pBook.showAll();
+    var count = pBook.count();
+    console.log(count);
 </script>
 
 </html>
