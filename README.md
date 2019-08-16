@@ -12,6 +12,8 @@
 
 - [git 小总结](https://github.com/zouxiaomingya/JavaScript/issues/7)
 
+- [Hooks 深入剖析](https://github.com/zouxiaomingya/JavaScript/issues/8)
+
 
 
 
