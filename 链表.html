@@ -11,48 +11,34 @@
 <body>
 </body>
 <script>
-
     // 链表查找
     function find(item) {
         var currNode = this.head;
-        while (currNode.element != item) {
-            currNode = currNode.next;
+        try {
+            while (currNode.element != item) {
+                currNode = currNode.next;
+            }
+        } catch (error) {
+            console.log(typeof error);
         }
         return currNode;
     }
-
-    // 插入 节点
-    function insert(newElement, item) {
-        var newNode = new Node(newElement);
-        var current = this.find(item);
-        newNode.next = current.next;
-        current.next = newNode;
-    }
-
     // 显示链表元素
     function display() {
         var currNode = this.head;
-        while (!currNode.next == null) {
+        while (!(currNode.next == null)) {
             console.log(currNode.next.element);
             currNode = currNode.next;
         }
     }
-
-    // Node 类
-    function Node(element) {
-        this.element = element;
-        this.next = null;
-    }
-
     // find prev Node 
-    function findPrev(item) {
+    function prevNode(item) {
         var currNode = this.head;
         while (!(currNode.next == null) && (currNode.next.element != item)) {
             currNode = currNode.next;
         }
         return currNode;
     }
-    
     // remove
     function remove() {
         var prevNode = this.findPrev(item);
@@ -60,23 +46,33 @@
             prevNode.next = prevNode.next.next;
         }
     }
-
+    // 插入 节点
+    function insert(newElement, item) {
+        var newNode = new Node(newElement);
+        var current = this.find(item);
+        newNode.next = current.next;
+        current.next = newNode;
+    }
+    // Node 类
+    function Node(element) {
+        this.element = element;
+        this.next = null;
+    }
     // LinkedLise 类
     function List() {
         this.head = new Node('head');
-        this.find = find;
-        this.insert = insert;
-        this.remove = remove;
-        this.prevNode = prevNode;
-        this.display = display;
     }
+
+    List.prototype.find = find;
+    List.prototype.insert = insert;
+    List.prototype.remove = remove;
+    List.prototype.prevNode = prevNode;
+    List.prototype.display = display;
 
     const list = new List()
     list.insert('222', 'head')
     list.insert('333', 'head')
     list.insert('444', 'head')
-    list.insert('555', 'head')
-    list.insert('444-11', '444')
     console.log(list);
 
 </script>
