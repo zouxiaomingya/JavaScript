@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,7 +14,7 @@
 
     // 链表查找
     function find(item) {
-        var currNode = this[item];
+        var currNode = this.head;
         while (currNode.element != item) {
             currNode = currNode.next;
         }
@@ -35,19 +36,38 @@
             console.log(currNode.next.element);
             currNode = currNode.next;
         }
-    } 
-    
+    }
+
     // Node 类
     function Node(element) {
         this.element = element;
         this.next = null;
     }
+
+    // find prev Node 
+    function findPrev(item) {
+        var currNode = this.head;
+        while (!(currNode.next == null) && (currNode.next.element != item)) {
+            currNode = currNode.next;
+        }
+        return currNode;
+    }
+    
+    // remove
+    function remove() {
+        var prevNode = this.findPrev(item);
+        if (!(prevNode === null)) {
+            prevNode.next = prevNode.next.next;
+        }
+    }
+
     // LinkedLise 类
     function List() {
         this.head = new Node('head');
         this.find = find;
         this.insert = insert;
-        // this.remove = remove;
+        this.remove = remove;
+        this.prevNode = prevNode;
         this.display = display;
     }
 
