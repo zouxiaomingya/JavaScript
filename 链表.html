@@ -12,8 +12,8 @@
 <script>
 
     // 链表查找
-    function find() {
-        var currNode = this.head;
+    function find(item) {
+        var currNode = this[item];
         while (currNode.element != item) {
             currNode = currNode.next;
         }
@@ -21,7 +21,7 @@
     }
 
     // 插入 节点
-    function insert() {
+    function insert(newElement, item) {
         var newNode = new Node(newElement);
         var current = this.find(item);
         newNode.next = current.next;
@@ -39,7 +39,7 @@
     
     // Node 类
     function Node(element) {
-        this.element.element;
+        this.element = element;
         this.next = null;
     }
     // LinkedLise 类
@@ -47,10 +47,17 @@
         this.head = new Node('head');
         this.find = find;
         this.insert = insert;
-        this.remove = remove;
+        // this.remove = remove;
         this.display = display;
     }
 
+    const list = new List()
+    list.insert('222', 'head')
+    list.insert('333', 'head')
+    list.insert('444', 'head')
+    list.insert('555', 'head')
+    list.insert('444-11', '444')
+    console.log(list);
 
 </script>
 
