@@ -1,8 +1,10 @@
-React Hooks 源码模拟与解读
-useState 解析
-useState 使用
+##  useState 解析
+
+### useState 使用
+
 通常我们这样来使用 useState 方法
 
+```javascript
 function App() {
   const [num, setNum] = useState(0);
   const add = () => {
@@ -15,9 +17,11 @@ function App() {
     </div>
   );
 }
-复制代码
-useState 的使用过程，我们先模拟一个大概的函数
+```
 
+> useState 的使用过程，我们先模拟一个大概的函数
+
+```javascript
 function useState(initialValue) {
   var value = initialValue
   function setState(newVal) {	
@@ -25,11 +29,13 @@ function useState(initialValue) {
   }
   return [value, setState]
 }
-复制代码
+```
+
 这个代码有一个问题，在执行 useState 的时候每次都会 var _val = initialValue，初始化数据；
 
-于是我们可以用闭包的形式来保存状态。
+> 于是我们可以用闭包的形式来保存状态。
 
+```javascript
 const MyReact = (function() {
    // 定义一个 value 保存在该模块的全局中
   let value
@@ -43,11 +49,13 @@ const MyReact = (function() {
     }
   }
 })()
-复制代码
+```
+
 这样在每次执行的时候，就能够通过闭包的形式 来保存 value。
 
 不过这个还是不符合 react 中的 useState。因为在实际操作中会出现多次调用，如下。
 
+```javascript
 function App() {
   const [name, setName] = useState('Kevin');
   const [age, setAge] = useState(0);
@@ -66,10 +74,13 @@ function App() {
     </div>
   );
 }
-复制代码
+```
+
 因此我们需要在改变 useState 储存状态的方式
 
-useState 模拟实现
+### useState 模拟实现
+
+```javascript
 const MyReact = (function() {
   // 开辟一个储存 hooks 的空间
   let hooks = []; 
@@ -92,26 +103,34 @@ const MyReact = (function() {
     }
   }
 })()
-复制代码
+```
+
 因此当重新渲染 App 的时候，再次执行 useState 的时候传入的参数 kevin , 0 也就不会去使用，而是直接拿之前 hooks 存储好的值。
 
-hooks 规则
-官网 hoos 规则中明确的提出 hooks 不要再循环，条件或嵌套函数中使用。
+### hooks 规则
+
+> 官网 hoos 规则中明确的提出 hooks 不要再循环，条件或嵌套函数中使用。
 
 
-为什么不可以？
-我们来看下
+![](https://user-gold-cdn.xitu.io/2019/8/24/16cc19d1c80dc51b?w=1962&h=1532&f=png&s=327893)
 
-下面这样一段代码。执行 useState 重新渲染，和初始化渲染 顺序不一样就会出现如下问题
+#### 为什么不可以？
 
-如果了解了上面 useState 模拟写法的存储方式，那么这个问题的原因就迎刃而解了。
+ 我们来看下
 
+> 下面这样一段代码。执行 useState 重新渲染，和初始化渲染 顺序不一样就会出现如下问题
+>
+> 如果了解了上面 useState 模拟写法的存储方式，那么这个问题的原因就迎刃而解了。
 
+![](https://user-gold-cdn.xitu.io/2019/8/24/16cc2a413618b61a?w=1002&h=1252&f=png&s=219748)
+![](https://user-gold-cdn.xitu.io/2019/8/24/16cc2a373b3a7ce4?w=1038&h=1260&f=png&s=62844)
+## useEffect 解析
 
-useEffect 解析
-useEffect 使用
-初始化会 打印一次 ‘useEffect_execute’， 改变年龄重新render，会再打印， 改变名字重新 render， 不会打印。因为依赖数组里面就监听了 age 的值
+### useEffect 使用
 
+> 初始化会 打印一次 ‘useEffect_execute’， 改变年龄重新render，会再打印， 改变名字重新 render， 不会打印。因为依赖数组里面就监听了 age 的值
+
+```javascript
 import React, { useState, useEffect } from 'react';
 
 function App() {
@@ -137,8 +156,11 @@ function App() {
 }
 export default App;
 
-复制代码
-useEffect 的模拟实现
+```
+
+### useEffect 的模拟实现
+
+```javascript
 const MyReact = (function() {
   // 开辟一个储存 hooks 的空间
   let hooks = []; 
@@ -177,17 +199,21 @@ const MyReact = (function() {
         
   }
 })()
-复制代码
-useEffect 注意事项
-依赖项要真实
-依赖需要想清楚。
+```
 
-刚开始使用 useEffect 的时候，我只有想重新触发 useEffect 的时候才会去设置依赖
+### useEffect 注意事项
+
+#### 依赖项要真实
+
+> 依赖需要想清楚。
+
+刚开始使用 useEffect 的时候，我只有想重新触发 useEffect  的时候才会去设置依赖
 
 那么也就会出现如下的问题。
 
-希望的效果是界面中一秒增加一岁
+**希望的效果是界面中一秒增加一岁**
 
+```javascript
 import React, { useState, useEffect } from 'react';
 
 function App() {
@@ -216,10 +242,11 @@ function App() {
 }
 export default App;
 
-复制代码
+```
+
 其实你会发现 这里界面就增加了 一次 年龄。究其原因:
 
-**在第一次渲染中，age是0。因此，setAge(age+ 1)在第一次渲染中等价于setAge(0 + 1)。然而我设置了0依赖为空数组，那么之后的 useEffect 不会再重新运行，它后面每一秒都会调用setAge(0 + 1) **
+**在第一次渲染中，`age`是`0`。因此，`setAge(age+ 1)`在第一次渲染中等价于`setAge(0 + 1)`。然而我设置了0依赖为空数组，那么之后的 useEffect 不会再重新运行，它后面每一秒都会调用setAge(0 + 1) **
 
 也就是当我们需要 依赖 age 的时候我们 就必须再 依赖数组中去记录他的依赖。这样useEffect 才会正常的给我们去运行。
 
@@ -227,8 +254,9 @@ export default App;
 
 方法一：
 
-真真切切的把你所依赖的状态填写到 数组中
+> 真真切切的把你所依赖的状态填写到 数组中
 
+```javascript
   // 通过监听 age 的变化。来重新执行 useEffect 内的函数
   // 因此这里也就需要记录定时器，当卸载的时候我们去清空定时器，防止多个定时器重新触发
   useEffect(() => {
@@ -240,30 +268,35 @@ export default App;
     };
   }, [age]);
 
-复制代码
+```
+
 方法二
 
-useState 的参数传入 一个方法。
+> useState 的参数传入 一个方法。
 
-注：上面我们模拟的 useState 并没有做这个处理 后面我会讲解源码中去解析。
+注：**上面我们模拟的 useState 并没有做这个处理** 后面我会讲解源码中去解析。
 
+```javascript
 useEffect(() => {
     setInterval(() => {
       setAge(age => age + 1);
     }, 1000);
   }, []);
-复制代码
-useEffect 只运行了一次，通过 useState 传入函数的方式它不再需要知道当前的age值。因为 React render 的时候它会帮我们处理
+```
 
-这正是setAge(age => age + 1)做的事情。再重新渲染的时候他会帮我们执行这个方法，并且传入最新的状态。
+useEffect 只运行了一次，通过 useState  传入函数的方式它不再需要知道当前的`age`值。因为 React render 的时候它会帮我们处理
+
+这正是`setAge(age => age + 1)`做的事情。再重新渲染的时候他会帮我们执行这个方法，并且传入最新的状态。
 
 所以我们做到了去时刻改变状态，但是依赖中却不用写这个依赖，因为我们将原本的使用到的依赖移除了。（这句话表达感觉不到位）
 
-接口无限请求问题
+#### 接口无限请求问题
+
 刚开始使用 useEffect 的我，在接口请求的时候常常会这样去写代码。
 
-props 里面有 页码，通过切换页码，希望监听页码的变化来重新去请求数据
+> props 里面有 页码，通过切换页码，希望监听页码的变化来重新去请求数据
 
+```javascript
 // 以下是伪代码 
 // 这里用 dva 发送请求来模拟
 
@@ -290,21 +323,27 @@ function App(props) {
 export default connect(({ goods }) => ({
   goods,
 }))(App);
-复制代码
+```
+
 然后得意洋洋的刷新界面，发现 Network 中疯狂循环的请求接口，导致页面的卡死。
 
 究其原因是因为在依赖中，我们通过接口改变了状态 props 的更新， 导致重新渲染组件，导致会重新执行 useEffect 里面的方法，方法执行完成之后 props 的更新， 导致重新渲染组件，依赖项目是对象，引用类型发现不相等，又去执行 useEffect 里面的方法，又重新渲染，然后又对比，又不相等， 又执行。因此产生了无限循环。
 
-Hooks 源码解析
-该源码位置: react/packages/react-reconciler/src/ReactFiberHooks.js
+## Hooks 源码解析
 
+该源码位置: ` react/packages/react-reconciler/src/ReactFiberHooks.js`
+
+```javascript
 const Dispatcher={
   useReducer: mountReducer,
   useState: mountState,
   // xxx 省略其他的方法
 }
-复制代码
-mountState 源码
+```
+
+#### mountState  源码
+
+```javascript
 function mountState<S>(
   initialState: (() => S) | S,
 ): [S, Dispatch<BasicStateAction<S>>] {
@@ -348,8 +387,11 @@ function mountState<S>(
  // 可以看到这个dispatch就是dispatchAction绑定了对应的 currentlyRenderingFiber 和 queue。最后return：
   return [hook.memoizedState, dispatch];
 }
-复制代码
-dispatchAction 源码
+```
+
+#### dispatchAction 源码 
+
+```javascript
 function dispatchAction<A>(fiber: Fiber, queue: UpdateQueue<A>, action: A) {
   //... 省略验证的代码
   const alternate = fiber.alternate;
@@ -408,12 +450,15 @@ function dispatchAction<A>(fiber: Fiber, queue: UpdateQueue<A>, action: A) {
     scheduleWork(fiber, expirationTime);
   }
 }
-复制代码
-mountReducer 源码
-多勒第三个参数，是函数执行，默认初始状态 undefined
+```
 
-其他的和 上面的 mountState 大同小异
+#### mountReducer 源码
 
+> 多勒第三个参数，是函数执行，默认初始状态 undefined
+>
+> 其他的和 上面的 mountState   大同小异
+
+```javascript
 function mountReducer<S, I, A>(
   reducer: (S, A) => S,
   initialArg: I,
@@ -442,37 +487,44 @@ function mountReducer<S, I, A>(
   ): any));
   return [hook.memoizedState, dispatch];
 }
-复制代码
-通过 react 源码中，可以看出 useState 是特殊的 useReducer
+```
 
-可见useState不过就是个语法糖，本质其实就是useReducer
-updateState 复用了 updateReducer（区别只是 updateState 将 reducer 设置为 updateReducer）
-mountState 虽没直接调用 mountReducer，但是几乎大同小异（区别只是 mountState 将 reducer 设置为basicStateReducer）
-注：这里仅是 react 源码，至于重新渲染这块 react-dom 还没有去深入了解。
+> 通过 react 源码中，可以看出 useState 是特殊的 useReducer
 
-更新：
-分两种情况，是否是 reRender，所谓reRender就是说在当前更新周期中又产生了新的更新，就继续执行这些更新知道当前渲染周期中没有更新为止
+- 可见`useState`不过就是个语法糖，本质其实就是`useReducer`
+- updateState 复用了 updateReducer（区别只是 updateState 将 reducer 设置为 updateReducer）
+- mountState 虽没直接调用 mountReducer，但是几乎大同小异（区别只是 mountState 将 reducer 设置为basicStateReducer）
 
-他们基本的操作是一致的，就是根据 reducer 和 update.action 来创建新的 state，并赋值给Hook.memoizedState 以及 Hook.baseState。
+`注：这里仅是 react 源码，至于重新渲染这块 react-dom 还没有去深入了解。`
 
-注意这里，对于非reRender得情况，我们会对每个更新判断其优先级，如果不是当前整体更新优先级内得更新会跳过，第一个跳过得Update会变成新的baseUpdate，他记录了在之后所有得Update，即便是优先级比他高得，因为在他被执行得时候，需要保证后续的更新要在他更新之后的基础上再次执行，因为结果可能会不一样。
+#### 更新：
 
-来源
+分两种情况，**是否是 reRender**，所谓`reRender`就是说在**当前更新周期中又产生了新的更新，就继续执行这些更新知道当前渲染周期中没有更新为止**
 
-preact 中的 hooks
-Preact 最优质的开源 React 替代品！（轻量级 3kb）
+他们基本的操作是一致的，就是根据 `reducer` 和 `update.action` 来创建新的 `state`，并赋值给`Hook.memoizedState` 以及 `Hook.baseState`。
+
+注意这里，对于非`reRender`得情况，我们会对每个更新判断其优先级，如果不是当前整体更新优先级内得更新会跳过，第一个跳过得`Update`会变成新的`baseUpdate`，**他记录了在之后所有得Update，即便是优先级比他高得，因为在他被执行得时候，需要保证后续的更新要在他更新之后的基础上再次执行，因为结果可能会不一样。**
+
+[来源](https://react.jokcy.me/book/api/react.html)
+
+## preact 中的 hooks
+> Preact 最优质的开源 React 替代品！（轻量级 3kb）
 
 注意：这里的替代是指如果不用 react 的话，可以使用这个。而不是取代。
+### useState 源码解析
 
-useState 源码解析
-调用了 useReducer 源码
+> 调用了 useReducer  源码
 
+```javascript
 
 export function useState(initialState) {
 	return useReducer(invokeOrReturn, initialState);
 }
-复制代码
-useReducer 源码解析
+```
+
+### useReducer 源码解析
+
+```javascript
 // 模块全局定义
 /** @type {number} */
 let currentIndex; // 状态的索引，也就是前面模拟实现 useState 时候所说的指针
@@ -512,8 +564,11 @@ export function useReducer(reducer, initialState, init) {
 	return hookState._value;
 }
 
-复制代码
-getHookState 方法
+```
+
+### getHookState 方法
+
+```javascript
 function getHookState(index) {
 	if (options._hook) options._hook(currentComponent);
 	const hooks = currentComponent.__hooks || (currentComponent.__hooks = { _list: [], _pendingEffects: [], _pendingLayoutEffects: [] });
@@ -523,20 +578,27 @@ function getHookState(index) {
 	}
 	return hooks._list[index];
 }
-复制代码
-invokeOrReturn 方法
+```
+
+### invokeOrReturn 方法
+
+```javascript
 function invokeOrReturn(arg, f) {
 	return typeof f === 'function' ? f(arg) : f;
 }
-复制代码
-总结
+```
+
+##  总结
+
 使用 hooks 几个月了。基本上所有类组件我都使用函数式组件来写。现在 react 社区的很多组件，都也开始支持hooks。大概了解了点重要的源码，做到知其然也知其所以然，那么在实际工作中使用他可以减少不必要的 bug，提高效率。
 
-最后
-全文章，如有错误或不严谨的地方，请务必给予指正，谢谢！
+## 最后
+
+> 全文章，如有错误或不严谨的地方，请务必给予指正，谢谢！
 
 参考：
 
-Don 神博客
-Deep dive: How do React hooks really work?
-React hooks源码解析
+- [Don 神博客](https://link.juejin.im/?target=https%3A%2F%2Fwww.kancloud.cn%2Fyunye%2Faxios%2F234845)
+- [Deep dive: How do React hooks really work?](<https://www.netlify.com/blog/2019/03/11/deep-dive-how-do-react-hooks-really-work/>)
+- [React hooks源码解析](<https://react.jokcy.me/book/api/react.html>)
+
