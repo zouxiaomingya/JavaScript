@@ -1,6 +1,4 @@
 1. Frontend Masters
-正如 Frontend Masters 这个网站名字所说明的，能在这里讲课的，都是大师级别。我挑几门对我帮助最大的课程，并简短说明如下：
-
 The Good Parts of JavaScript and the Web
 老师是 Douglas Crockford，JS 教父级人物，《JavaScript 语言精髓》作者。这门课讲了 JS 的历史和一些重要的语言细节，并把重点放在函数上。Crockford 认为函数这是 JS 这门语言最重要的部分。后半部分讲了浏览器和服务器的工作原理，以及网络安全。
 (1) Deep JavaScript Foundations (2) Rethinking Asynchronous JavaScript (3) Functional-Light JavaScript, v2 (4) ES6: The Right Parts (5) Organizing JavaScript Functionality (6) Coercion in JavaScript
