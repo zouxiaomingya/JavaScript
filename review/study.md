@@ -1,5 +1,4 @@
 1. Frontend Masters
-The Good Parts of JavaScript and the Web
 老师是 Douglas Crockford，JS 教父级人物，《JavaScript 语言精髓》作者。这门课讲了 JS 的历史和一些重要的语言细节，并把重点放在函数上。Crockford 认为函数这是 JS 这门语言最重要的部分。后半部分讲了浏览器和服务器的工作原理，以及网络安全。
 (1) Deep JavaScript Foundations (2) Rethinking Asynchronous JavaScript (3) Functional-Light JavaScript, v2 (4) ES6: The Right Parts (5) Organizing JavaScript Functionality (6) Coercion in JavaScript
 共 6 门课，老师都是 Kyle Simpson.《你不知道的 JS 》系列书作者，等下还会提到他。第一门课深入了 JS 的大部分重要细节，这是学好 JS 的第一步。其它几门课分专题继续深入，分别是异步编程，ES6 的重要部分，组织 JS 功能模块（学了这个后，我从没写过面条代码），轻量级函数式编程（有配套书，个人觉得是 JS 开发必学），最后是 JS 中的强制类型转换。
