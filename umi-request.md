@@ -21,4 +21,29 @@ index 文件很清楚 分别引用了 3 个文件夹
 2. onion
 3. utils
 
+### index.js 文件
+
+```javaScript
+const request = (initOptions = {}) => {
+  const coreInstance = new Core(initOptions);
+  const umiInstance = (url, options = {}) => {
+    const mergeOptions = {
+      ...initOptions,
+      ...options,
+      headers: {
+        ...initOptions.headers,
+        ...options.headers,
+      },
+      params: {
+        ...initOptions.params,
+        ...options.params,
+      },
+      method: (options.method || initOptions.method || 'get').toLowerCase(),
+    };
+    return coreInstance.request(url, mergeOptions);
+  };
+  // 省略一些代码 ....
+  return umiInstance;
+};
+```
 
