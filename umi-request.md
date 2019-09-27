@@ -47,3 +47,47 @@ const request = (initOptions = {}) => {
 };
 ```
 
+> request 构造函数中 关键的是 Core 这个方法。
+
+
+### Core.js 文件
+
+```javaScript
+  request(url, options) {
+    const { onion } = this;
+    const obj = {
+      req: { url, options },
+      res: null,
+      cache: this.mapCache,
+      responseInterceptors,
+    };
+    if (typeof url !== 'string') {
+      throw new Error('url MUST be a string');
+    }
+
+    return new Promise((resolve, reject) => {
+      // dealRequestInterceptors 是请求拦截器
+      Core.dealRequestInterceptors(obj)
+        .then(() => onion.execute(obj))
+        .then(() => {
+          resolve(obj.res);
+        })
+        .catch(error => {
+          const { errorHandler } = obj.req.options;
+          if (errorHandler) {
+            try {
+              const data = errorHandler(error);
+              resolve(data);
+            } catch (e) {
+              reject(e);
+            }
+          } else {
+            reject(error);
+          }
+        });
+    });
+  }
+}
+};
+```
+
