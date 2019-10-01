@@ -91,3 +91,157 @@ const request = (initOptions = {}) => {
 };
 ```
 
+
+## 快速上手
+
+执行 **GET** 请求
+
+```javascript
+import request from 'umi-request';
+
+request.get('/api/v1/xxx?id=1')
+  .then(function (response) {
+    console.log(response);
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+
+// 也可将 URL 的参数放到 options.params 里
+request.get('/api/v1/xxx', {
+    params: {
+      id: 1
+    }
+  })
+  .then(function (response) {
+    console.log(response);
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+```
+
+执行 **POST** 请求
+
+```
+request.post('/api/v1/user', {
+    data: {
+      name: 'Mike'
+    }
+  })
+  .then(function (response) {
+    console.log(response);
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+```
+
+## umi-request API
+
+可以通过向 **umi-request** 传参来发起请求
+
+**umi-request(url[, options])**
+
+```javascript
+import request from 'umi-request';
+
+request('/api/v1/xxx', {
+    method: 'get',
+    params: { id: 1 }
+  })
+  .then(function (response) {
+    console.log(response);
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+
+request('/api/v1/user', {
+    method: 'post',
+    data: {
+      name: 'Mike'
+    }
+  })
+  .then(function (response) {
+    console.log(response);
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+```
+
+## 请求方法的别名
+
+为了方便起见，为所有支持的请求方法提供了别名, `method` 属性不必在配置中指定
+
+**request.get(url[, options])**
+
+**request.post(url[, options])**
+
+**request.delete(url[, options])**
+
+**request.put(url[, options])**
+
+**request.patch(url[, options])**
+
+**request.head(url[, options])**
+
+**request.options(url[, options])**
+
+## 创建实例
+
+有些通用的配置我们不想每个请求里都去添加，那么可以通过 `extend` 新建一个 umi-request 实例
+
+**extend([options])**
+
+```javascript
+import { extend } from 'umi-request';
+
+const request = extend({
+  prefix: '/api/v1',
+  timeout: 1000,
+  headers: {
+    'Content-Type': 'multipart/form-data'
+  }
+});
+
+request.get('/user')
+  .then(function (response) {
+    console.log(response);
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+```
+
+NodeJS 环境创建实例
+
+```javascript
+const umi = require('umi-request');
+const extendRequest = umi.extend({ timeout: 10000 })
+
+extendRequest('/api/user')
+  .then(res => {
+    console.log(res);
+  })
+  .catch(err => {
+    console.log(err);
+  });
+```
+
+以下是可用的实例方法，指定的配置将与实例的配置合并。
+
+**request.get(url[, options])**
+
+**request.post(url[, options])**
+
+**request.delete(url[, options])**
+
+**request.put(url[, options])**
+
+**request.patch(url[, options])**
+
+**request.head(url[, options])**
+
+**request.options(url[, options])**
