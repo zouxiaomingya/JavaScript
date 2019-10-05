@@ -84,10 +84,3 @@ RequireJS 和 Sea.js 都是模块加载器，倡导模块化开发理念，核�
 最重要的
 最后，向 RequireJS 致敬！RequireJS 和 Sea.js 是好兄弟，一起努力推广模块化开发思想，这才是最重要的。
 
-更新
-2013.06.30 推荐一篇图片并茂的文章：Sea.js 与 RequireJS 最大的区别
-参考
-LABjs、RequireJS、Sea.js 哪个最好用？为什么？
-从 RequireJS 到 Sea.js 系列：（1） （2） （3） （4） （5） （要翻墙）
-Sea.js 和 RequireJS 的异同（要翻墙）
-AMD 与 CMD 的区别
