@@ -486,11 +486,7 @@
 
   如果后续修改导致组件渲染结果发生变化，快照将会不匹配，测试则不通过。
 
-  
-
   ![img](https://user-gold-cdn.xitu.io/2018/9/24/1660b0b7586db194?imageView2/0/w/1280/h/960/format/webp/ignore-error/1)
-
-  
 
   ## Jest 命令行
 
