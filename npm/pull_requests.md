@@ -24,11 +24,11 @@
 
 > fork 之后该项目就会导入到自己的 github 仓库
 
-[](https://raw.githubusercontent.com/zouxiaomingya/JavaScript/master/npm/img/one.jpg)
+![](https://raw.githubusercontent.com/zouxiaomingya/JavaScript/master/npm/img/one.jpg)
 
 2. 进入自己的 github 主页 git clone umi-request 这个仓库。
 
-[](https://raw.githubusercontent.com/zouxiaomingya/JavaScript/master/npm/img/two.jpg)
+![](https://raw.githubusercontent.com/zouxiaomingya/JavaScript/master/npm/img/two.jpg)
 
 
 具体操作，打开控制台
@@ -49,9 +49,9 @@ $ git push origin Interceptors-pr
 
 > 进入自己仓库的 umi-request 的 pr 分支
 
-[](https://raw.githubusercontent.com/zouxiaomingya/JavaScript/master/npm/img/three.jpg)
+![](https://raw.githubusercontent.com/zouxiaomingya/JavaScript/master/npm/img/three.jpg)
 
 
 然后点击 Compare & pull request 按钮 进行提交
 
-[](https://raw.githubusercontent.com/zouxiaomingya/JavaScript/master/npm/img/four.jpg)
+![](https://raw.githubusercontent.com/zouxiaomingya/JavaScript/master/npm/img/four.jpg)
