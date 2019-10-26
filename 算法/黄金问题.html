@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <h1>题目</h1>
+  <p>有一个国家发现了5座金矿，每座金矿的黄金储量不同，</p>
+  <p> 需要参与挖掘的工人数也不同。参与挖矿工人的总数是10人。 </p>
+  <p> 每座金矿要么全挖，要么不挖（不能派出一半人挖取一半金矿）。
+    <p>要求用程序求解出，要想得到尽可能多的黄金，应该选择挖取哪几座金矿？</p>
+    <p>金矿1 400金 / 5人</p>
+    <p>金矿2 500金 / 5人</p>
+    <p>金矿3 200金 / 3人</p>
+    <p>金矿4 300金 / 4人</p>
+    <p>金矿5 350金 / 3人</p>
+    <hr>
+    <h1>解</h1>
+    <p>我们设：金矿数 n，工人数 w, 黄金量为数组 g[], 金矿用工量为数组 P[]，</p>
+</body>
+<script>
+  getMostGold(5, 10, [400, 500, 200, 300, 350], [5, 5, 3, 4, 3])
+
+  function getMostGold(n, w, g, p) {
+    let preResults = [];
+    let results = [];
+
+    for (let i = 0; i <= w; i++) {
+      preResults[i] = i < p[0] ? 0 : g[0]
+    }
+    // 循环 金矿数量
+    for (let i = 0; i < n; i++) {
+      // 循环 工人数
+      for (let j = 0; j <= w; j++) {
+        if (j < p[i]) {
+          results[j] = preResults[j]
+        } else {
+          results[j] = Math.max(preResults[j], preResults[j - p[i]] + g[i]);
+        }
+      }
+      for(let j=0; j<= w; j++) {
+				preResults[j] = results[j];
+			}
+    }
+    return results[w]
+  }
+</script>
+
+</html>
