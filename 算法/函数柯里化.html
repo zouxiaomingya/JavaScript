@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <p>请实现一个 add 函数，满足以下功能</p>
+    <p>add(1); // 1</p>
+    <p>add(1)(2); // 3 </p>
+    <p>add(1)(2)(3)； // 6</p>
+    <p>add(1)(2, 3); // 6</p>
+    <p>add(1, 2)(3); // 6</p>
+    <p>add(1, 2, 3); // 6</p>
+</body>
+<script>
+function add(a) {
+    
+    sum.toString = function() { // 重写toString()方法
+        return a;
+    }
+    function sum(b) { // 使用闭包
+    	a = a + b; // 累加
+    	return sum;
+    }
+    // console.log(sum)
+    return sum; // 返回一个函数
+}
+    // 得到的结果需要在调用一次 toString 方法
+    var a = add(1)(2)(3)
+    console.log(a)
+</script>
+
+</html>
