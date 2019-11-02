@@ -12,9 +12,17 @@ class Compiler {
         const content = fs.readFileSync(modulePath, 'utf8')
         return content;
     }
+    parse() {
+
+    }
     buildModule(modulePath) {
         const source = this.getSource(modulePath);
         const moduleName = './' + path.relative(this.root, modulePath)
+        const { sourecCode, dependencies } = this.parse(source, path.dirname(moduleName))
+        this.module[modulePath] = sourecCode;
+    }
+    emtiFile() {
+
     }
     run() {
         this.buildModule(path.resolve(this.root, this.entry), true)
