@@ -29,7 +29,7 @@ class Compiler {
                     node.callee.name === '___webpack_require__';
                     const moduleName = node.arguments[0].value;
                     moduleName = moduleName + (path.extname(moduleName) ? '' : '.js');
-                    moduleName = './' + path.join(parentPath, moduleName);
+                    moduleName = './' + path.join(parentPath, moduleName); 
                     dependencies.push(moduleName);
                     node.arguments = [t.stringLiteral(moduleName)];
                 }
