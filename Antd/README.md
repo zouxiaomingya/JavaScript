@@ -61,4 +61,38 @@ if (React.forwardRef) {
 export default RefTypography;
 
 ```
+ #### base.tsx 是该组件的核心内容
 
+> syncEllipsis 组件是该内容的核心。
+``` javaScript
+syncEllipsis() {
+    const { ellipsisText, isEllipsis, expanded } = this.state;
+    const { rows } = this.getEllipsis();
+    const { children } = this.props;
+    if (!rows || rows < 0 || !this.content || expanded) return;
+
+    // Do not measure if css already support ellipsis
+    if (this.canUseCSSEllipsis()) return;
+
+    warning(
+      toArray(children).every((child: React.ReactNode) => typeof child === 'string'),
+      'Typography',
+      '`ellipsis` should use string as children only.',
+    );
+
+    const { content, text, ellipsis } = measure(
+      findDOMNode(this.content),
+      rows,
+      children,
+      this.renderOperations(true),
+      ELLIPSIS_STR,
+    );
+    if (ellipsisText !== text || isEllipsis !== ellipsis) {
+      this.setState({ ellipsisText: text, ellipsisContent: content, isEllipsis: ellipsis });
+    }
+  }
+```
+
+通过 canUseCSSEllipsis 方法来判读是否可以通过现有的浏览器支持的 css 样式来满足，如果不满足使用 measure 方法。
+
+measure 是一个关键的方法。
