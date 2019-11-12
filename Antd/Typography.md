@@ -96,3 +96,42 @@ syncEllipsis() {
 通过 canUseCSSEllipsis 方法来判读是否可以通过现有的浏览器支持的 css 样式来满足，如果不满足使用 measure 方法。
 
 measure 是一个关键的方法。
+> measure 里面这个方法就是获得最大可以展示的字。
+```javaScript
+function measureText(
+    textNode: Text,
+    fullText: string,
+    startLoc = 0,
+    endLoc = fullText.length,
+    lastSuccessLoc = 0,
+  ): MeasureResult {
+    const midLoc = Math.floor((startLoc + endLoc) / 2);
+    const currentText = fullText.slice(0, midLoc);
+    textNode.textContent = currentText;
+
+    if (startLoc >= endLoc - 1) {
+      // Loop when step is small
+      for (let step = endLoc; step >= startLoc; step -= 1) {
+        const currentStepText = fullText.slice(0, step);
+        textNode.textContent = currentStepText;
+
+        if (inRange()) {
+          return step === fullText.length
+            ? {
+                finished: false,
+                reactNode: fullText,
+              }
+            : {
+                finished: true,
+                reactNode: currentStepText,
+              };
+        }
+      }
+    }
+
+    if (inRange()) {
+      return measureText(textNode, fullText, midLoc, endLoc, midLoc);
+    }
+    return measureText(textNode, fullText, startLoc, midLoc, lastSuccessLoc);
+  }
+```
