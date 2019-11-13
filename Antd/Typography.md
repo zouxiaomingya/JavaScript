@@ -109,6 +109,7 @@ function measureText(
     const currentText = fullText.slice(0, midLoc);
     textNode.textContent = currentText;
 
+    // 通过二分法，指针位置改变，递归实现后 在去找最大的展示字符数。
     if (startLoc >= endLoc - 1) {
       // Loop when step is small
       for (let step = endLoc; step >= startLoc; step -= 1) {
@@ -133,5 +134,43 @@ function measureText(
       return measureText(textNode, fullText, midLoc, endLoc, midLoc);
     }
     return measureText(textNode, fullText, startLoc, midLoc, lastSuccessLoc);
+  }
+```
+通过循环便利 childNode 来得到最大放入的字符数
+ 通过 nodeType 来判断是 nodeType === 3 是文本类型 1 是代表元素
+```javaScript
+function measureNode(childNode: ChildNode, index: number): MeasureResult {
+    const type = childNode.nodeType;
+
+    if (type === ELEMENT_NODE) {
+      // We don't split element, it will keep if whole element can be displayed.
+      appendChildNode(childNode);
+      if (inRange()) {
+        return {
+          finished: false,
+          reactNode: contentList[index],
+        };
+      }
+
+      // Clean up if can not pull in
+      ellipsisContentHolder.removeChild(childNode);
+      return {
+        finished: true,
+        reactNode: null,
+      };
+    }
+    if (type === TEXT_NODE) {
+      const fullText = childNode.textContent || '';
+      const textNode = document.createTextNode(fullText);
+      appendChildNode(textNode);
+      return measureText(textNode, fullText);
+    }
+
+    // Not handle other type of content
+    // PS: This code should not be attached after react 16
+    return {
+      finished: false,
+      reactNode: null,
+    };
   }
 ```
