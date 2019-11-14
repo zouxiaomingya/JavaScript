@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="box">
+        222
+        <p>1111</p>
+    </div>
+</body>
+
+<script>
+const div = document.getElementById('box')
+let span = document.createElement('span')
+
+// span.textContent = '11';
+// div.innerHTML = `22<h1>11</h1>`;
+div.innerText = '22<h1>11</h1>'
+div.textContent = '22<h1>11</h1>'
+div.appendChild(span)
+
+</script>
+</html>
