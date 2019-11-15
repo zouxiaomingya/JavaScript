@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+    .wrap {
+      width: 400px;
+    }
+    .box {
+      background: skyblue;
+      display: inline-block;
+      line-height: 1.5;
+    }
+  </style>
+  <body>
+    <div class="wrap">
+      <span class="box">
+        打开房间啊大量的卡到家啦地方卡洛斯顿发大发阿斯顿发大222--李白受到粉丝的咖啡屋剪短发
+      </span>
+      <span class="box">
+        
+      </span>
+    </div>
+  </body>
+  <script>
+    const spanDom = document.getElementsByClassName("box")[0];
+    const target = document.getElementsByClassName("box")[1];
+
+    const originCSS = getComputedStyle(spanDom);
+
+    const ellipsis = "...";
+    const { lineHeight: lineHeightCss, height: heigthCss } = originCSS;
+    const height = parseInt(heigthCss);
+    const lineHeight = parseInt(lineHeightCss);
+
+    function getNewHeight(dom) {
+      return parseInt(getComputedStyle(dom).height);
+    }
+    const userText = spanDom.textContent;
+
+    function getMaxText(str, oneLineHeight, maxHeight) {
+      if (maxHeight <= oneLineHeight) return str;
+      const sliceStr = str.slice(0, str.length - 1);
+      spanDom.innerHTML = sliceStr + ellipsis;
+      const newHeight = getNewHeight(spanDom);
+      if (newHeight <= oneLineHeight) {
+        return sliceStr + ellipsis;
+      } else {
+        return getMaxText(sliceStr, lineHeight, height);
+      }
+    }
+    const maxText = getMaxText(userText, lineHeight, height);
+    console.log(maxText);
+    target.innerHTML = maxText
+  </script>
+</html>
