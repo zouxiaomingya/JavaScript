@@ -119,3 +119,4 @@ function heapSort(arr) {
 }
 ```
 [图解排序算法](https://www.cnblogs.com/chengxiao/p/6129630.html)
+[github 各类语言算法](https://github.com/hustcc/JS-Sorting-Algorithm/blob/master/7.heapSort.md)
