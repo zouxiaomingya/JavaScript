@@ -108,7 +108,5 @@ class MinCoinChange {
 
 const rninCoinChange = new MinCoinChange([1, 5, 10, 25]);
 console.log(rninCoinChange.makeChange(36));
-// [1, 10, 25]
 const minCoinChange2 = new MinCoinChange([1, 3, 4]);
 console.log(minCoinChange2.makeChange(6));
-// [3, 3]
