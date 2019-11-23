@@ -55,7 +55,8 @@
     };
     var result = depthFirstSearchWithRecursive(root);
     console.log(result);
-    
+
+
     const depthFirstSearchWithoutRecursive = source => {
       const result = []; // 存放结果的数组
       // 当前栈内为全部数组
@@ -76,6 +77,22 @@
     };
     var result = depthFirstSearchWithoutRecursive(root);
     console.log(result);
+
+    const breadthFirstSearch = source => {
+      const result = []; // 存放结果的数组
+      const queue = JSON.parse(JSON.stringify(source));
+      while (queue.length > 0) {
+        const node = queue.shift();
+        result.push(node.id);
+        const len = node.children && node.children.length;
+        for (let i = 0; i < len; i += 1) {
+          queue.push(node.children[i]);
+        }
+      }
+      return result;
+    };
+
+    var result = breadthFirstSearch(root);
+    console.log(result);
   </script>
 </html>
-·
