@@ -28,7 +28,7 @@
 
 [Context-React](https://zh-hans.reactjs.org/docs/context.html) 官网介绍
 
-```react
+```javaScript
 // Context 可以让我们无须明确地传遍每一个组件，就能将值深入传递进组件树。
 // 为当前的 theme 创建一个 context（“light”为默认值）。
 const ThemeContext = React.createContext('light');
@@ -72,7 +72,7 @@ class ThemedButton extends React.Component {
 
 
 
-```react
+```javaScript
 const MyContext = React.createContext(defaultValue);
 
 <MyContext.Provider value={/* 某个值 */}>
@@ -101,7 +101,7 @@ const MyContext = React.createContext(defaultValue);
 
 
 
-```react
+```javaScript
 import {ThemeContext, themes} from './theme-context';
 import ThemeTogglerButton from './theme-toggler-button';
 
@@ -148,7 +148,7 @@ ReactDOM.render(<App />, document.root);
 
 
 
-```react
+```javaScript
 // Theme context，默认的 theme 是 “light” 值
 const ThemeContext = React.createContext('light');
 
@@ -209,7 +209,7 @@ function Content() {
 
 使用 connect 也是基于 react-redux 思想，把它封装为一个方法。调用 connect 方法返回的是一个高阶组件。并且 connect 方法中支持传入一个函数，来过滤，筛选子组件需要的状态，也便于维护 重新 render 等
 
-```react
+```javaScript
 import React, { createContext } from 'react';
 import { useImmer } from 'use-immer';
 // useImmer 文章末尾有介绍推荐
@@ -264,7 +264,7 @@ export default createProvider;
 
 
 
-```react
+```javaScript
 import React from 'react';
 import Header from './layout/Header.jsx';
 import Footer from './layout/Footer.jsx';
@@ -289,7 +289,7 @@ export default App;
 
 > Header.jsx
 
-```react
+```javaScript
 import React from 'react';
 import { Select } from 'antd';
 import { connect } from '../connect';
@@ -320,7 +320,7 @@ export default connect()(Head);
 
 
 
-```react
+```javaScript
 import React, { Fragment } from 'react';
 import { Select } from 'antd';
 import { connect } from '../../connect';
@@ -374,7 +374,7 @@ export default connect()(Footer);
 
 
 
-```react
+```javaScript
 // 未使用 useContext
 export const connect = (fn) => (ComponentUi) => () => {
   const state = useContext(ctx)
