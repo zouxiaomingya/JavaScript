@@ -1,10 +1,6 @@
-
-
-# 状态管理
-
 ## 开头
 
-一个项目，一个复杂的逻辑，我觉得最重要的就是状态管理，状态管理的好不好，直接体现了一个项目的逻辑性、可读性、维护性等是否清晰，易读，和高效。
+一个项目，一个复杂的逻辑，我觉得状态管理显得尤为的重要，状态管理的好不好，直接体现了一个项目的逻辑性、可读性、维护性等是否清晰，易读，和高效。
 
 从最早的类组件使用 this.state, this.setState 去管理状态，到 redux , subscribe, dispatch 的发布订阅，redux 的使用就面临重复和沉重的的 reducer，让我俨然变成了 Ctrl CV 工程师。于是后面接触 [dva](https://dvajs.com/guide/#特性)，它是一个基于 [redux](https://github.com/reduxjs/redux) 和 [redux-saga](https://github.com/redux-saga/redux-saga) 的数据流方案。通过 model 来分片管理全局状态，使用 connect 方法去给需要的深层次的组件传递状态。
 
@@ -28,7 +24,7 @@
 
 [Context-React](https://zh-hans.reactjs.org/docs/context.html) 官网介绍
 
-```javaScript
+```javascript
 // Context 可以让我们无须明确地传遍每一个组件，就能将值深入传递进组件树。
 // 为当前的 theme 创建一个 context（“light”为默认值）。
 const ThemeContext = React.createContext('light');
@@ -72,7 +68,7 @@ class ThemedButton extends React.Component {
 
 
 
-```javaScript
+```javascript
 const MyContext = React.createContext(defaultValue);
 
 <MyContext.Provider value={/* 某个值 */}>
@@ -90,9 +86,6 @@ const MyContext = React.createContext(defaultValue);
 ```
 
 
-
-
-
 ### 具体实际案例
 
 
@@ -101,7 +94,7 @@ const MyContext = React.createContext(defaultValue);
 
 
 
-```javaScript
+```javascript
 import {ThemeContext, themes} from './theme-context';
 import ThemeTogglerButton from './theme-toggler-button';
 
@@ -148,7 +141,7 @@ ReactDOM.render(<App />, document.root);
 
 
 
-```javaScript
+```javascript
 // Theme context，默认的 theme 是 “light” 值
 const ThemeContext = React.createContext('light');
 
@@ -199,8 +192,6 @@ function Content() {
 
 
 
-
-
 ## 封装自己的跨组件管理方式
 
 > ./connect.js 文件
@@ -209,7 +200,7 @@ function Content() {
 
 使用 connect 也是基于 react-redux 思想，把它封装为一个方法。调用 connect 方法返回的是一个高阶组件。并且 connect 方法中支持传入一个函数，来过滤，筛选子组件需要的状态，也便于维护 重新 render 等
 
-```javaScript
+```javascript
 import React, { createContext } from 'react';
 import { useImmer } from 'use-immer';
 // useImmer 文章末尾有介绍推荐
@@ -264,7 +255,7 @@ export default createProvider;
 
 
 
-```javaScript
+```javascript
 import React from 'react';
 import Header from './layout/Header.jsx';
 import Footer from './layout/Footer.jsx';
@@ -289,7 +280,7 @@ export default App;
 
 > Header.jsx
 
-```javaScript
+```javascript
 import React from 'react';
 import { Select } from 'antd';
 import { connect } from '../connect';
@@ -320,7 +311,7 @@ export default connect()(Head);
 
 
 
-```javaScript
+```javascript
 import React, { Fragment } from 'react';
 import { Select } from 'antd';
 import { connect } from '../../connect';
@@ -362,19 +353,13 @@ function Footer({ _state, _dispatch }) {
 export default connect()(Footer);
 ```
 
-
-
-### 状态通信效果展示
-
-视频展示～～～～
-
 ### 使用 useContext
 
 我们都知道 react 16.8 以后也出了 useContext 那么我们可以通过使用 useContext 来优化 connect 方法
 
 
 
-```javaScript
+```javascript
 // 未使用 useContext
 export const connect = (fn) => (ComponentUi) => () => {
   const state = useContext(ctx)
@@ -404,8 +389,21 @@ export const connect = fn => ComponentUi => () => {
 
 注意： 调用了 `useContext` 的组件总会在 context 值变化时重新渲染。如果重渲染组件的开销较大，你可以通过文章末尾推荐的不必要重新 render 开销大的组件去了解如何优化。
 
+ ### 最后
+ 
+ [github地址](https://github.com/zouxiaomingya/blog)
+ 
+ 4步代码跑起来
+ ```
+ git clone https://github.com/zouxiaomingya/blog
+ cd blog
+ npm i
+ npm start
+ ```
 
+> 全文章，如有错误或不严谨的地方，请务必给予指正，谢谢！ 
 
-### 推荐
+参考：
 
-[不必要的重新 render 开销大的组件](https://kentcdodds.com/blog/usememo-and-usecallback/)
+- [react useContext 文档](https://zh-hans.reactjs.org/docs/hooks-reference.html#usecontext)
+
