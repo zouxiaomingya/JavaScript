@@ -407,3 +407,5 @@ export const connect = fn => ComponentUi => () => {
 
 - [react useContext 文档](https://zh-hans.reactjs.org/docs/hooks-reference.html#usecontext)
 
+- [不必要的重新 render 开销大的组件](https://kentcdodds.com/blog/usememo-and-usecallback/)
+
