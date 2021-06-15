@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+
+<style>
+  .video {
+    width: 400px;
+    height: 200px;
+  }
+</style>
+
+<body>
+  <input id='video-dom' type="file" accept="video/*">
+  <video id="audio_id" class="video" controls>
+</body>
+
+<script>
+  const videoDom = document.getElementById('video-dom')
+  videoDom.onchange = (e) => {
+    const file = e.target.files[0]
+    var url = URL.createObjectURL(file);
+    var videos = document.getElementById("audio_id")
+    videos.src = url;
+
+    // 视频开始加载时执行
+    videos.onloadstart = () => {
+      console.log(videos.duration, 'onloadstart>>>>>>');
+    }
+
+    // ondurationchange 事件在视频/音频（audio/video）的时长发生变化时触发。
+    // 当视频/音频（audio/video）已经加载后，视频/音频（audio/video）的时长从 "NaN" 修改为正在的时长。
+    videos.ondurationchange = () => {
+      console.log(videos.duration, 'ondurationchange>>>>>>');
+    }
+
+    // 指定视频/音频（audio/video）的元数据加载后触发
+    videos.onloadedmetadata = () => {
+      console.log(videos.duration, 'onloadedmetadata>>>>>>');
+    }
+
+    // 事件在当前帧的数据加载完成且还没有足够的数据播放视频/音频（audio/video）的下一帧时触发。
+    videos.onloadeddata = () => {
+      console.log(videos.duration, 'onloadeddata>>>>>>');
+    }
+
+    // 事件在浏览器下载指定的视频/音频（audio/video）时触发。
+    videos.onprogress = () => {
+      console.log(videos.duration, 'onprogress>>>>>>');
+    }
+
+    // 事件在用户可以开始播放视频/音频（audio/video）时触发。
+    videos.oncanplay = () => {
+      console.log(videos.duration, 'oncanplay>>>>>>');
+    }
+
+    // 事件在视频/音频（audio/video）可以正常播放且无需停顿和缓冲时触发。
+    videos.oncanplaythrough = () => {
+      console.log(videos.duration, 'oncanplaythrough>>>>>>');
+    }
+  }
+</script>
+
+</html>
