@@ -17,16 +17,26 @@
 //     console.log(color);
 // })
 
+const AjPromise = require("./polyfill_class");
 function getList() {
-    return new Promise((resolve, reject)=>{
-        resolve(222);
-        return 11
-    })
+  return new AjPromise((resolve, reject) => {
+    resolve(222);
+    return 11;
+  });
 }
-const list = getList().then(data=>{
-    console.log(data, '>>>')
-    return 1;
-}).then(data => {
-    console.log(data, '%%%%');
-}).then(()=>{return 1}).then(item=>console.log(item, '>>>'))
+const list = getList().then((data) => {
+  console.log(data, ">>>");
+  return 1;
+});
+
+list
+  .then((data) => {
+    console.log(data, "%%%%");
+  })
+  .then((res) => {
+    console.log(res, "res>>>>>>");
+    return "over";
+  });
+
 console.log(list);
+setTimeout(() => console.log(list), 1);
