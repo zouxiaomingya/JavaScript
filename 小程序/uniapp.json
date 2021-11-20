@@ -1,0 +1,89 @@
+uniapp XBuilder 的数据配置
+{
+  "editor.codeassist.px2upx.proportion": "0.5",
+  "editor.colorScheme": "Monokai",
+  "editor.tabSize": 2,
+  "editor.tokenColorCustomizations": {
+    "[Monokai]": {
+      "rules": [
+        {
+          "scope": ["variable"],
+          "settings": {
+            "foreground": "#9cdcfe"
+          }
+        },
+        {
+          "scope": ["storage.type"],
+          "settings": {
+            "fontStyle": "italic ",
+            "foreground": "#569cd6"
+          }
+        },
+        {
+          "scope": ["keyword"],
+          "settings": {
+            "foreground": "#c586c0"
+          }
+        },
+        {
+          "scope": ["entity.name.function"],
+          "settings": {
+            "foreground": "#dcdcaa"
+          }
+        },
+        {
+          "scope": ["variable.parameter"],
+          "settings": {
+            "fontStyle": "italic ",
+            "foreground": "#9cdcfe"
+          }
+        },
+        {
+          "scope": ["string"],
+          "settings": {
+            "foreground": "#ce9178"
+          }
+        },
+        {
+          "scope": ["constant.numeric"],
+          "settings": {
+            "foreground": "#b5cea8"
+          }
+        },
+        {
+          "scope": ["comment"],
+          "settings": {
+            "foreground": "#6a9955"
+          }
+        },
+        {
+          "scope": [
+            "punctuation.definition.template-expression",
+            "punctuation.section.embedded"
+          ],
+          "settings": {
+            "foreground": "#569cd6"
+          }
+        },
+        {
+          "scope": ["entity.other.attribute-name"],
+          "settings": {
+            "foreground": "#d7ba7d"
+          }
+        },
+        {
+          "scope": ["entity.name.tag"],
+          "settings": {
+            "foreground": "#569cde"
+          }
+        }
+      ]
+    }
+  },
+  "explorer.iconTheme": "vs-seti",
+  "weApp.devTools.path": "D:/微信web开发者工具",
+  "workbench.colorCustomizations": {
+    "[Default]": {}
+  },
+  "editor.contentAssistSelectionMode": "Alt+数字模式"
+}
