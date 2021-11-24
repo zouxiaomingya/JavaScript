@@ -118,6 +118,10 @@
 	$git rm --cached file.txt
 以上操作也可通过github官方桌面端实现，很方便。
 
+（4）取消暂存文件
+git restore --staged xxxx.txt
+
+
 **7.move --移动文件**
 
 简要说明：主要是介绍几种移动文件的不同方式，通过使用mv命令以及add命令。
