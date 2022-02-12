@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+  <script>
+    var quickSort = function (arr) {
+      if (arr.length <= 1) {
+        return arr;
+      }
+      const [head, ...rest] = arr;
+      var left = [];
+      var right = [];
+
+      for (var i = 0; i < rest.length; i++) {
+        if (rest[i] < head) {
+          left.push(rest[i]);
+        } else {
+          right.push(rest[i]);
+        }
+      }
+      return [...quickSort(left), head, ...quickSort(right)];
+    };
+
+    const mockArr = [6, 12, 8, 9, 0, 123, 1];
+    console.log(quickSort(mockArr));
+  </script>
+</html>
