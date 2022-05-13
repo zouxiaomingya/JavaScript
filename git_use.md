@@ -47,3 +47,18 @@ then
     export GIT_AUTHOR_EMAIL="$CORRECT_EMAIL"
 fi
 ' --tag-name-filter cat -- --branches --tags
+
+
+
+### 
+> push 代码出现问题：fatal: unable to access 'https://github.com/zouxiaomingya/JavaScript.git/': Failed to connect to github.com port 443 after 21090 ms: Timed out
+
+```
+先
+git config --global --unset http.proxy
+再
+git push 
+```
+
+设置完成之后 
+> pull 代码出现问题：fatal: unable to access 'https://github.com/zouxiaomingya/JavaScript.git/': OpenSSL SSL_read: Connection was reset, errno 10054
