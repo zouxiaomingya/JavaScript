@@ -61,7 +61,7 @@ git push
 ```
 
 设置完成之后 
-> pull 代码出现问题：fatal: unable to access 'https://github.com/zouxiaomingya/JavaScript.git/': OpenSSL SSL_read: Connection was reset, errno 10054
+> pull 代码出现问题：fatal: unable to access 'https://github.com/zouxiaomingya/JavaScript.git/': OpenSSL SSL_read: Connection was reset, errno 10054l
 
 
 
