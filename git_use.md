@@ -86,3 +86,18 @@ git branch -m oldName newName
   d.把修改后的本地分支与远程分支关联
 
   git branch --set-upstream-to origin/newName
+
+
+### git 忽略已经曾经没有忽略过的文件，需要重新 cached 
+规则很简单，不做过多解释，但是有时候在项目开发过程中，突然心血来潮想把某些目录或文件加入忽略规则，按照上述方法定义后发现并未生效，原因是.gitignore只能忽略那些原来没有被track的文件，如果某些文件已经被纳入了版本管理中，则修改.gitignore是无效的。那么解决方法就是先把本地缓存删除（改变成未track状态），然后再提交：
+
+在版本控制目录下 右键—》Git bash here  打开命令行工具
+
+$ 是提示符 每行 输入后 按 回车键 执行 
+
+登录后复制 
+$ git rm -r --cached .
+
+$ git add .
+
+$ git commit -m 'update .gitignore'
