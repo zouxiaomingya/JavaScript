@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+    }
+
+    .box-wrap {
+      width: 440px;
+      height: 80px;
+      border: 1px solid #333;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .box-list {
+      position: absolute;
+      display: flex;
+      align-items: center;
+      left: 0;
+    }
+
+    .box {
+      width: 80px;
+      height: 80px;
+      margin-right: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #eeeeee;
+      color: #000000;
+      font-weight: 500;
+
+    }
+  </style>
+
+  <div class="box-wrap">
+    <div class="box-list">
+      <div class="box">1</div>
+      <div class="box">2</div>
+      <div class="box">3</div>
+      <div class="box">4</div>
+      <div class="box">5</div>
+    </div>
+  </div>
+
+  <script>
+    let box_list = document.querySelector('.box-list');
+
+    // 复制一份list
+    box_list.innerHTML += box_list.innerHTML;
+
+    let left = 0;
+    let timer = null;
+
+    // 启动定时器，动态移动list
+    function startTimer() {
+      timer = setInterval(() => {
+        left -= 2;
+        // 每个元素的宽度和margin距离
+        if (left == -(5 * (80 + 10))) {
+          left = 0;
+        }
+        box_list.style.left = left + 'px';
+      }, 20)
+    }
+
+    // 鼠标移入暂停
+    box_list.onmouseenter = function () {
+      clearInterval(timer);
+    }
+
+    // 鼠标离开继续
+    box_list.onmouseleave = function () {
+      startTimer()
+    }
+    // 页面加载的时候启动定时器
+    startTimer();
+  </script>
+</body>
+
+</html>

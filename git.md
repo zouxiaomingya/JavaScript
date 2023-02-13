@@ -310,3 +310,37 @@ Git reflog 是你做频繁提交的动力，频繁提交意味着，在 reflog �
 （7）git stash drop stash@{$num} ：丢弃stash@{$num}存储，从列表中删除这个存储
 
 （8）git stash clear ：删除所有缓存的 stash
+
+**17. merge**
+当前分支合并远端的 master
+//查询当前远程的版本
+$ git remote -v
+```
+  //获取最新代码到本地(本地当前分支为[branch]，获取的远端的分支为[origin/branch])
+  $ git fetch origin master  [示例1：获取远端的origin/master分支]
+  $ git fetch origin dev [示例2：获取远端的origin/dev分支]
+
+  //查看版本差异
+  $ git log -p master..origin/master [示例1：查看本地master与远端origin/master的版本差异]
+  $ git log -p dev..origin/dev   [示例2：查看本地dev与远端origin/dev的版本差异]
+
+  //合并最新代码到本地分支
+  $ git merge origin/master  [示例1：合并远端分支origin/master到当前分支]
+  $ git merge origin/dev [示例2：合并远端分支origin/dev到当前分支]
+```md
+
+
+**18. git删除并添加忽略已提交的文件或目录**
+
+```
+有时候上传远程仓库之后发现不小心把应该要忽略的文件或目录给push上去了（如.idea目录），这时候再去编辑project目录下的.gitignore文件并添加忽略已经不起作用了，因为.gitignore只对从来没有commit过的文件起作用。
+
+这时我们可以通过git命令删除已提交的文件或目录，命令如下：
+
+git rm --cached -r .idea
+然后编辑project目录下的.gitignore文件（不同位置文件或目录的忽略编辑不同位置的.gitignore文件），比如添加忽略.idea目录，如下：
+
+.idea
+在.gitignore文件里边添加上面的内容，然后再进行commit和push，这样就删除了远程的已提交的内容，这样下次提交的时候就不会再提交上面忽略的内容了。
+
+```md

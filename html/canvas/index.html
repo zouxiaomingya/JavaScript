@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.slim.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</head>
+
+<style>
+
+</style>
+
+<body>
+  <div id="content" style="width:150px;height:150px;border:1px solid blue;">
+    <span>Hello World!</span>
+    <br>
+    <span>
+      <h2>Are you hear me?</h2>
+    </span>
+  </div>
+
+  <button id="btnSave">save</button>
+  <script>
+    $(function () {
+      $('#btnSave').click(function (event) {
+        console.log(html2canvas, 'html2canvas>>>>>>');
+        console.log($('#content')[0]);
+        html2canvas($('#content')[0], {
+          onrendered: function (canvas) {
+            console.log(canvas, 'canvas>>>>>>');
+            document.body.appendChild(canvas);
+            convertCanvasToImage(canvas);
+          }
+        }).then((res) => {
+          console.log(res, 'res>>>>>>');
+          convertCanvasToImage(res);
+        })
+      });
+
+      function convertCanvasToImage(canvas) {
+        var image = new Image();
+        image.src = canvas.toDataURL("image/png");
+        document.body.appendChild(image);
+        return image;
+      }
+    })
+
+  </script>
+
+</body>
+
+</html>

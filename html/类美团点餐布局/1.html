@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    .box {
+      display: flex;
+      height: 500px;
+      overflow-x: hidden;
+    }
+
+    .left {
+      flex-shrink: 0;
+      width: 80px;
+      background: pink;
+    }
+
+    .right {
+      flex: 1 1 auto;
+      box-sizing: border-box;
+      padding: 0 16px 0 16px;
+      background: skyblue;
+    }
+
+    .img {
+      width: 50px;
+      height: 50px;
+    }
+    .content {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+    .content:after {
+      flex: auto;
+      content: '';
+    }
+    .phone {
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+      align-items: center;
+      justify-content: center;
+      /* width: calc((100% - 16px * 4) / 4); */
+      width: 25%;
+      margin-top: 8px;
+      /* margin-right: 16px; */
+    }
+
+    .text {
+      width: 50px;
+      text-align: center;
+    }
+  </style>
+  <body>
+    <div class="box">
+      <div class="left">LEFT</div>
+      <div class="right">
+        <div class="item">
+          <div class="title">手机品牌</div>
+          <div class="content">
+            <div class="phone">
+              <img class="img" src="./1.png" alt="" />
+              <div class="text">联想</div>
+            </div>
+            <div class="phone">
+              <img class="img" src="./1.png" alt="" />
+              <div class="text">联想</div>
+            </div>
+            <div class="phone">
+              <img class="img" src="./1.png" alt="" />
+              <div class="text">联想</div>
+            </div>
+            <div class="phone">
+              <img class="img" src="./1.png" alt="" />
+              <div class="text">联想</div>
+            </div>
+            <div class="phone">
+              <img class="img" src="./1.png" alt="" />
+              <div class="text">联想</div>
+            </div>
+            <div class="phone">
+              <img class="img" src="./1.png" alt="" />
+              <div class="text">联想</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
